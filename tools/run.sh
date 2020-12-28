@@ -10,14 +10,17 @@ python app/manage.py wait_for_db
 python app/manage.py migrate
 python app/manage.py create_roles
 
+echo "admin: ${ADMIN_USERNAME}"
+echo "password: ${ADMIN_PASSWORD}"
+
 echo "Creating admin"
 if [[ -n "${ADMIN_USERNAME}" ]] && [[ -n "${ADMIN_PASSWORD}" ]] && [[ -n "${ADMIN_EMAIL}" ]]; then
-  python app/manage.py create_admin \
+    python app/manage.py create_admin \
     --username "${ADMIN_USERNAME}" \
     --password "${ADMIN_PASSWORD}" \
     --email "${ADMIN_EMAIL}" \
     --noinput \
-  || true
+    || true
 fi
 
 echo "Starting django"
